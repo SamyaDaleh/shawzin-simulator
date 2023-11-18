@@ -37,13 +37,8 @@ jobs:
       - name: Copy Sounds Folder
         run: cp -r sounds/ artifact/sounds/
 
-      - name: Zip Artifact
-        run: |
-          cd artifact
-          7z a ../shawzin.zip *
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: shawzin
-          path: shawzin.zip
+          path: artifact/
