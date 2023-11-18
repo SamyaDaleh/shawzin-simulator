@@ -329,21 +329,44 @@ impl EventHandler<GameError> for MyGame {
         Ok(())
     }
 
-
     fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
-        graphics::clear(ctx, graphics::Color::BLACK); // Clear the screen (or choose another color)
+        graphics::clear(ctx, graphics::Color::BLACK);
 
-        // Create a text fragment with the current scale
         let scale_text = Text::new(format!("Current Scale (press tab to change): {:?}", self.scale));
         let dest_point_1 = [10.0, 10.0]; // Position where the text will be drawn (x, y)
         let shawzin_text = Text::new(format!("Current Shawzin (press A to change): {:?}", self.shawzin));
         let dest_point_2 = [10.0, 25.0]; // Position where the text will be drawn (x, y)
 
-        // Draw the text
         graphics::draw(ctx, &scale_text, DrawParam::default().dest(dest_point_1))?;
         graphics::draw(ctx, &shawzin_text, DrawParam::default().dest(dest_point_2))?;
 
-        graphics::present(ctx) // Present the screen
+        let keys = vec!["1", "2", "3"];
+        let modifiers = vec![">", "v", "<", "_"];
+
+        let mut ascii_art = String::new();
+
+        for &modifier in &modifiers {
+            ascii_art.push_str("\n   |  |  | \n");
+            let mut line = format!("{}: ", modifier);
+            for &key in &keys {
+                let combo = format!("{}{}", key, modifier);
+                if let Some(note) = self.get_note_from_input(&self.scale, &combo) {
+                    let note_str = format!("{:?}", note).replace("Sharp", "#");
+                    line.push_str(&format!("{} ", note_str));
+                }
+            }
+            ascii_art.push_str(&line);
+        }
+
+        ascii_art.push_str("\n   |  |  |");
+        ascii_art.push_str("\n   1  2  3");
+
+        let scale_ascii_art = Text::new(ascii_art);
+        let dest_ascii_art = [10.0, 50.0];
+
+        graphics::draw(ctx, &scale_ascii_art, DrawParam::default().dest(dest_ascii_art))?;
+
+        graphics::present(ctx)
     }
 
     fn key_down_event(&mut self, _ctx: &mut Context, keycode: KeyCode, _keymods: KeyMods, _repeat: bool) {
@@ -392,7 +415,6 @@ impl EventHandler<GameError> for MyGame {
             KeyCode::Space => self.space_pressed = false,
             _ => (),
         }
-        //self.audio_manager.stop_sound()
     }
 }
 

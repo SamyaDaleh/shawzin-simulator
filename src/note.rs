@@ -350,7 +350,8 @@ impl Note {
             Note::C4 => Note::B3, //wait, BSharp3 does not exist? need to recheck with WF
             Note::CSharp4 => Note::C4,
             Note::D4 => Note::CSharp4,
-            Note::E4 => Note::D4,
+            Note::DSharp4 => Note::D4,
+            Note::E4 => Note::DSharp4,
             Note::F4 => Note::E4,
             Note::FSharp4 => Note::F4,
             Note::G4 => Note::FSharp4,

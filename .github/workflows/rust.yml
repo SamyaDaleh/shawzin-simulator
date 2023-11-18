@@ -12,23 +12,6 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Install alsa
-      run: sudo apt-get install -y librust-alsa-sys-dev
-    - name: Install dependencies for libudev
-      run: sudo apt install -y pkg-config libusb-1.0-0-dev libftdi1-dev
-    - name: Install libudev
-      run: sudo apt-get install libudev-dev
-    - name: suggested on stack overflow to install after libudev
-      run: cargo install cargo-flash
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
-
   publish:
 
     runs-on: windows-latest

@@ -6,6 +6,7 @@ use std::time::Duration;
 use crate::{Note, Shawzin};
 
 pub struct AudioManager {
+    #[allow(unused)]
     stream: OutputStream,
     sink: Arc<Mutex<Sink>>,
 }
