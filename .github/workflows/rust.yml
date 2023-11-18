@@ -28,3 +28,40 @@ jobs:
       run: cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
+
+  publish:
+
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Build Release
+        run: cargo build --release
+
+      - name: Create Artifact Directory
+        run: mkdir artifact
+
+      - name: Copy Executable
+        run: cp target/release/shawzin.exe artifact/
+
+      - name: Copy Sounds Folder
+        run: cp -r sounds/ artifact/sounds/
+
+      - name: Zip Artifact
+        run: |
+          cd artifact
+          7z a ../shawzin.zip *
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: shawzin
+          path: shawzin.zip
