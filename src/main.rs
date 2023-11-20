@@ -5,20 +5,7 @@ use ggez::{Context, GameError, GameResult, graphics};
 use ggez::graphics::{Text, DrawParam};
 use ggez::event::{self, EventHandler, KeyCode, KeyMods};
 use crate::sound::AudioManager;
-use crate::note::Note;
-
-#[derive(Debug)]
-enum Scale {
-    PentatonicMinor,
-    PentatonicMajor,
-    Chromatic,
-    Hexatonic,
-    Major,
-    Minor,
-    Hirajoshi,
-    Phrygian,
-    Yo
-}
+use crate::note::{Note, Scale, ScaleMapping};
 
 #[derive(Debug)]
 pub enum Shawzin {
@@ -57,143 +44,8 @@ struct MyGame {
 
 impl MyGame {
     fn get_note_from_input(&self, scale: &Scale, combined_key: &str) -> Option<Note> {
-        match scale {
-            Scale::PentatonicMinor => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::DSharp4),
-                "3_" => Some(Note::F4),
-                "1<" => Some(Note::G4),
-                "2<" => Some(Note::ASharp4),
-                "3<" => Some(Note::C5),
-                "1v" => Some(Note::DSharp5),
-                "2v" => Some(Note::F5),
-                "3v" => Some(Note::G5),
-                "1>" => Some(Note::ASharp5),
-                "2>" => Some(Note::C6),
-                "3>" => Some(Note::DSharp6),
-                _ => None,
-            },
-            Scale::PentatonicMajor => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::D4),
-                "3_" => Some(Note::E4),
-                "1<" => Some(Note::G4),
-                "2<" => Some(Note::A4),
-                "3<" => Some(Note::C5),
-                "1v" => Some(Note::D5),
-                "2v" => Some(Note::E5),
-                "3v" => Some(Note::G5),
-                "1>" => Some(Note::A5),
-                "2>" => Some(Note::C6),
-                "3>" => Some(Note::D6),
-                _ => None,
-            },
-            Scale::Chromatic => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::CSharp4),
-                "3_" => Some(Note::D4),
-                "1<" => Some(Note::DSharp4),
-                "2<" => Some(Note::E4),
-                "3<" => Some(Note::F4),
-                "1v" => Some(Note::FSharp4),
-                "2v" => Some(Note::G4),
-                "3v" => Some(Note::GSharp4),
-                "1>" => Some(Note::A4),
-                "2>" => Some(Note::ASharp4),
-                "3>" => Some(Note::B4),
-                _ => None,
-            },
-            Scale::Hexatonic => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::DSharp4),
-                "3_" => Some(Note::F4),
-                "1<" => Some(Note::FSharp4),
-                "2<" => Some(Note::G4),
-                "3<" => Some(Note::ASharp4),
-                "1v" => Some(Note::C5),
-                "2v" => Some(Note::DSharp5),
-                "3v" => Some(Note::F5),
-                "1>" => Some(Note::FSharp5),
-                "2>" => Some(Note::G5),
-                "3>" => Some(Note::ASharp5),
-                _ => None,
-            },
-            Scale::Major => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::D4),
-                "3_" => Some(Note::E4),
-                "1<" => Some(Note::F4),
-                "2<" => Some(Note::G4),
-                "3<" => Some(Note::A4),
-                "1v" => Some(Note::B4),
-                "2v" => Some(Note::C5),
-                "3v" => Some(Note::D5),
-                "1>" => Some(Note::E5),
-                "2>" => Some(Note::F5),
-                "3>" => Some(Note::G5),
-                _ => None,
-            },
-            Scale::Minor => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::D4),
-                "3_" => Some(Note::DSharp4),
-                "1<" => Some(Note::F4),
-                "2<" => Some(Note::G4),
-                "3<" => Some(Note::GSharp4),
-                "1v" => Some(Note::ASharp4),
-                "2v" => Some(Note::C5),
-                "3v" => Some(Note::D5),
-                "1>" => Some(Note::DSharp5),
-                "2>" => Some(Note::F5),
-                "3>" => Some(Note::G5),
-                _ => None,
-            },
-            Scale::Hirajoshi => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::CSharp4),
-                "3_" => Some(Note::F4),
-                "1<" => Some(Note::FSharp4),
-                "2<" => Some(Note::ASharp4),
-                "3<" => Some(Note::C5),
-                "1v" => Some(Note::CSharp5),
-                "2v" => Some(Note::F5),
-                "3v" => Some(Note::FSharp5),
-                "1>" => Some(Note::A5),
-                "2>" => Some(Note::C6),
-                "3>" => Some(Note::CSharp6),
-                _ => None,
-            },
-            Scale::Phrygian => match combined_key {
-                "1_" => Some(Note::C4),
-                "2_" => Some(Note::CSharp4),
-                "3_" => Some(Note::E4),
-                "1<" => Some(Note::F4),
-                "2<" => Some(Note::G4),
-                "3<" => Some(Note::GSharp4),
-                "1v" => Some(Note::ASharp4),
-                "2v" => Some(Note::C5),
-                "3v" => Some(Note::CSharp5),
-                "1>" => Some(Note::E5),
-                "2>" => Some(Note::F5),
-                "3>" => Some(Note::G5),
-                _ => None,
-            },
-            Scale::Yo => match combined_key {
-                "1_" => Some(Note::CSharp4),
-                "2_" => Some(Note::DSharp4),
-                "3_" => Some(Note::FSharp4),
-                "1<" => Some(Note::GSharp4),
-                "2<" => Some(Note::ASharp4),
-                "3<" => Some(Note::CSharp5),
-                "1v" => Some(Note::DSharp5),
-                "2v" => Some(Note::FSharp5),
-                "3v" => Some(Note::GSharp5),
-                "1>" => Some(Note::ASharp5),
-                "2>" => Some(Note::CSharp6),
-                "3>" => Some(Note::DSharp6),
-                _ => None,
-            },
-        }
+        let mapping = ScaleMapping::new(scale);
+        mapping.get_note(combined_key)
     }
 
     fn play_shawzin_sound(&self, keycode: KeyCode) {
@@ -426,7 +278,7 @@ fn main() -> GameResult {
         right_arrow_pressed: false,
         down_arrow_pressed: false,
         space_pressed: false,
-        scale: Scale::Major,
+        scale: Scale::PentatonicMinor,
         audio_manager_1: AudioManager::new(),
         audio_manager_2: AudioManager::new(),
         audio_manager_3: AudioManager::new(),

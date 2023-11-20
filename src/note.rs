@@ -1,7 +1,10 @@
+use std::collections::HashMap;
 use crate::Shawzin;
 
 #[derive(Debug)]
 #[derive(PartialEq)]
+#[derive(Clone)]
+#[derive(Copy)]
 pub enum Note {
     C4, CSharp4, D4, DSharp4, E4, F4, FSharp4, G4, GSharp4, A4, ASharp4, B4,
     C5, CSharp5, D5, DSharp5, E5, F5, FSharp5, G5, GSharp5, A5, ASharp5, B5,
@@ -14,6 +17,7 @@ impl Note {
         match shawzin {
             Shawzin::Courtly => {
                 match self {
+                    Note::B3 => "DuviriShawzinOctZeroB3",
                     Note::C4 => "DuviriShawzinOctOneC",
                     Note::CSharp4 => "DuviriShawzinOctOneCSharp",
                     Note::D4 => "DuviriShawzinOctOneD",
@@ -42,11 +46,11 @@ impl Note {
                     Note::CSharp6 => "DuviriShawzinOctThreeCSharp",
                     Note::D6 => "DuviriShawzinOctThreeD",
                     Note::DSharp6 => "DuviriShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Mimica => {
                 match self {
+                    Note::B3 => "ShawzinOctZeroB",
                     Note::C4 => "ShawzinOctOneC",
                     Note::CSharp4 => "ShawzinOctOneCSharp",
                     Note::D4 => "ShawzinOctOneD",
@@ -75,11 +79,11 @@ impl Note {
                     Note::CSharp6 => "ShawzinOctThreeCSharp",
                     Note::D6 => "ShawzinOctThreeD",
                     Note::DSharp6 => "ShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Nelumbo => {
                 match self {
+                    Note::B3 => "LotusShawzinOctZeroB",
                     Note::C4 => "LotusShawzinOctOneC",
                     Note::CSharp4 => "LotusShawzinOctOneCSharp",
                     Note::D4 => "LotusShawzinOctOneD",
@@ -108,11 +112,11 @@ impl Note {
                     Note::CSharp6 => "LotusShawzinOctThreeCSharp",
                     Note::D6 => "LotusShawzinOctThreeD",
                     Note::DSharp6 => "LotusShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Corbu => {
                 match self {
+                    Note::B3 => "GrineerShawzinOctZeroB",
                     Note::C4 => "GrineerShawzinOctOneC",
                     Note::CSharp4 => "GrineerShawzinOctOneCSharp",
                     Note::D4 => "GrineerShawzinOctOneD",
@@ -141,11 +145,11 @@ impl Note {
                     Note::CSharp6 => "GrineerShawzinOctThreeCSharp",
                     Note::D6 => "GrineerShawzinOctThreeD",
                     Note::DSharp6 => "GrineerShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Tiamat => {
                 match self {
+                    Note::B3 => "SentientShawzinOctZeroB",
                     Note::C4 => "SentientShawzinOctOneC",
                     Note::CSharp4 => "SentientShawzinOctOneCSharp",
                     Note::D4 => "SentientShawzinOctOneD",
@@ -174,11 +178,11 @@ impl Note {
                     Note::CSharp6 => "SentientShawzinOctThreeCSharp",
                     Note::D6 => "SentientShawzinOctThreeD",
                     Note::DSharp6 => "SentientShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::AristeiPrime => {
                 match self {
+                    Note::B3 => "PrimeShawzinOctZeroB",
                     Note::C4 => "PrimeShawzinOctOneC",
                     Note::CSharp4 => "PrimeShawzinOctOneCSharp",
                     Note::D4 => "PrimeShawzinOctOneD",
@@ -207,11 +211,11 @@ impl Note {
                     Note::CSharp6 => "PrimeShawzinOctThreeCSharp",
                     Note::D6 => "PrimeShawzinOctThreeD",
                     Note::DSharp6 => "PrimeShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Narmer => {
                 match self {
+                    Note::B3 => "NarmerShawzinOctZeroB",
                     Note::C4 => "NarmerShawzinOctOneC",
                     Note::CSharp4 => "NarmerShawzinOctOneCSharp",
                     Note::D4 => "NarmerShawzinOctOneD",
@@ -240,11 +244,11 @@ impl Note {
                     Note::CSharp6 => "NarmerShawzinOctThreeCSharp",
                     Note::D6 => "NarmerShawzinOctThreeD",
                     Note::DSharp6 => "NarmerShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::KiraS => {
                 match self {
+                    Note::B3 => "ZarimanShawzinOctZeroB",
                     Note::C4 => "ZarimanShawzinOctOneC",
                     Note::CSharp4 => "ZarimanShawzinOctOneCSharp",
                     Note::D4 => "ZarimanShawzinOctOneD",
@@ -273,11 +277,11 @@ impl Note {
                     Note::CSharp6 => "ZarimanShawzinOctThreeCSharp",
                     Note::D6 => "ZarimanShawzinOctThreeD",
                     Note::DSharp6 => "ZarimanShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::VoidSSong => {
                 match self {
+                    Note::B3 => "ZarimanVoidShawzinOctZeroB",
                     Note::C4 => "ZarimanVoidShawzinOctOneC",
                     Note::CSharp4 => "ZarimanVoidShawzinOctOneCSharp",
                     Note::D4 => "ZarimanVoidShawzinOctOneD",
@@ -306,11 +310,11 @@ impl Note {
                     Note::CSharp6 => "ZarimanVoidShawzinOctThreeCSharp",
                     Note::D6 => "ZarimanVoidShawzinOctThreeD",
                     Note::DSharp6 => "ZarimanVoidShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
             Shawzin::Lonesome => {
                 match self {
+                    Note::B3 => "DuviriErsatzShawzinOctZeroB",
                     Note::C4 => "DuviriErsatzShawzinOctOneC",
                     Note::CSharp4 => "DuviriErsatzShawzinOctOneCSharp",
                     Note::D4 => "DuviriErsatzShawzinOctOneD",
@@ -339,7 +343,6 @@ impl Note {
                     Note::CSharp6 => "DuviriErsatzShawzinOctThreeCSharp",
                     Note::D6 => "DuviriErsatzShawzinOctThreeD",
                     Note::DSharp6 => "DuviriErsatzShawzinOctThreeDSharp",
-                    _ => ""
                 }
             }
         }
@@ -347,7 +350,7 @@ impl Note {
 
     pub(crate) fn transpose_down_semitone(self) -> Note {
         match self {
-            Note::C4 => Note::B3, //wait, BSharp3 does not exist? need to recheck with WF
+            Note::C4 => Note::B3,
             Note::CSharp4 => Note::C4,
             Note::D4 => Note::CSharp4,
             Note::DSharp4 => Note::D4,
@@ -375,5 +378,107 @@ impl Note {
             Note::DSharp6 => Note::D6,
             _ => self,
         }
+    }
+}
+
+#[derive(Debug)]
+pub enum Scale {
+    PentatonicMinor,
+    PentatonicMajor,
+    Chromatic,
+    Hexatonic,
+    Major,
+    Minor,
+    Hirajoshi,
+    Phrygian,
+    Yo
+}
+
+pub struct ScaleMapping {
+    notes: HashMap<&'static str, Note>,
+}
+
+impl ScaleMapping {
+    pub(crate) fn new(scale: &Scale) -> Self {
+        let notes = match scale {
+            Scale::PentatonicMinor => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::DSharp4), ("3_", Note::F4),
+                    ("1<", Note::G4), ("2<", Note::ASharp4), ("3<", Note::C5),
+                    ("1v", Note::DSharp5), ("2v", Note::F5), ("3v", Note::G5),
+                    ("1>", Note::ASharp5), ("2>", Note::C6), ("3>", Note::DSharp6),
+                ]
+            },
+            Scale::PentatonicMajor => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::D4), ("3_", Note::E4),
+                    ("1<", Note::G4), ("2<", Note::A4), ("3<", Note::C5),
+                    ("1v", Note::D5), ("2v", Note::E5), ("3v", Note::G5),
+                    ("1>", Note::A5), ("2>", Note::C6), ("3>", Note::D6),
+                ]
+            },
+            Scale::Chromatic => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::CSharp4), ("3_", Note::D4),
+                    ("1<", Note::DSharp4), ("2<", Note::E4), ("3<", Note::F4),
+                    ("1v", Note::FSharp4), ("2v", Note::G4), ("3v", Note::GSharp4),
+                    ("1>", Note::A4), ("2>", Note::ASharp4), ("3>", Note::B4),
+                ]
+            },
+            Scale::Hexatonic => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::DSharp4), ("3_", Note::F4),
+                    ("1<", Note::FSharp4), ("2<", Note::G4), ("3<", Note::ASharp4),
+                    ("1v", Note::C5), ("2v", Note::DSharp5), ("3v", Note::F5),
+                    ("1>", Note::FSharp5), ("2>", Note::G5), ("3>", Note::ASharp5),
+                ]
+            },
+            Scale::Major => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::D4), ("3_", Note::E4),
+                    ("1<", Note::F4), ("2<", Note::G4), ("3<", Note::A4),
+                    ("1v", Note::B4), ("2v", Note::C5), ("3v", Note::D5),
+                    ("1>", Note::E5), ("2>", Note::F5), ("3>", Note::G5),
+                ]
+            },
+            Scale::Minor => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::D4), ("3_", Note::DSharp4),
+                    ("1<", Note::F4), ("2<", Note::G4), ("3<", Note::GSharp4),
+                    ("1v", Note::ASharp4), ("2v", Note::C5), ("3v", Note::D5),
+                    ("1>", Note::DSharp5), ("2>", Note::F5), ("3>", Note::G5),
+                ]
+            },
+            Scale::Hirajoshi => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::CSharp4), ("3_", Note::F4),
+                    ("1<", Note::FSharp4), ("2<", Note::ASharp4), ("3<", Note::C5),
+                    ("1v", Note::CSharp5), ("2v", Note::F5), ("3v", Note::FSharp5),
+                    ("1>", Note::A5), ("2>", Note::C6), ("3>", Note::CSharp6),
+                ]
+            },
+            Scale::Phrygian => {
+                vec![
+                    ("1_", Note::C4), ("2_", Note::CSharp4), ("3_", Note::E4),
+                    ("1<", Note::F4), ("2<", Note::G4), ("3<", Note::GSharp4),
+                    ("1v", Note::ASharp4), ("2v", Note::C5), ("3v", Note::CSharp5),
+                    ("1>", Note::E5), ("2>", Note::F5), ("3>", Note::G5),
+                ]
+            },
+            Scale::Yo => {
+                vec![
+                    ("1_", Note::CSharp4), ("2_", Note::DSharp4), ("3_", Note::FSharp4),
+                    ("1<", Note::GSharp4), ("2<", Note::ASharp4), ("3<", Note::CSharp5),
+                    ("1v", Note::DSharp5), ("2v", Note::FSharp5), ("3v", Note::GSharp5),
+                    ("1>", Note::ASharp5), ("2>", Note::CSharp6), ("3>", Note::DSharp6),
+                ]
+            },
+        }.into_iter().collect();
+
+        ScaleMapping { notes }
+    }
+
+    pub(crate) fn get_note(&self, combined_key: &str) -> Option<Note> {
+        self.notes.get(combined_key).copied()
     }
 }

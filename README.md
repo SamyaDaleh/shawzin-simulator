@@ -13,6 +13,5 @@ this.
 ## Controls
 
 Press 1, 2, 3 to play the raw strings. Hold Left, Down, or Right when playing a
-string for higher notes. Hold space for Whammy to play a semitone deeper
-(sounds for B3 are currently missing).
+string for higher notes. Hold space for Whammy to play a semitone deeper.
 Press tab to change the scale. Press A to change the instrument.
