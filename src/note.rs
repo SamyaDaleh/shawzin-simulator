@@ -17,7 +17,7 @@ impl Note {
         match shawzin {
             Shawzin::Courtly => {
                 match self {
-                    Note::B3 => "DuviriShawzinOctZeroB3",
+                    Note::B3 => "DuviriShawzinOctZeroB",
                     Note::C4 => "DuviriShawzinOctOneC",
                     Note::CSharp4 => "DuviriShawzinOctOneCSharp",
                     Note::D4 => "DuviriShawzinOctOneD",
