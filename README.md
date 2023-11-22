@@ -4,6 +4,11 @@ Simulates a Shawzin from Warframe, a video game by Digital Extremes. If you
 want to train your Shawzin skills but don't have the full game at hand, use
 this.
 
+## System Requirements
+
+* Windows (64 bit)
+* 30 MB of free disc space I guess
+
 ## Installation
 
 * Download the artifact from the latest workflow run in the Actions tab.
