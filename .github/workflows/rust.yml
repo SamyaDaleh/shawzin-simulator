@@ -55,14 +55,9 @@ jobs:
         with:
           name: shawzin
 
-      - name: Zip the Artifact
-        run: |
-          cd shawzin
-          7z a ../shawzin.zip *
-
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: shawzin.zip
+          files: artifact/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
